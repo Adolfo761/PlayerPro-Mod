@@ -1,0 +1,61 @@
+name: Compilar Player Pro Mod
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chequear Código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Instalar Apktool
+        run: |
+          wget -q -O apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
+          wget -q -O apktool.jar https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.3.jar
+          sudo mv apktool /usr/local/bin/apktool
+          sudo mv apktool.jar /usr/local/bin/apktool.jar
+          sudo chmod +x /usr/local/bin/apktool
+          sudo chmod +x /usr/local/bin/apktool.jar
+          apktool -version
+
+      - name: 🛠️ Aplicar Parches
+        run: |
+          if [ -f "scripts/patch.sh" ]; then
+            chmod +x scripts/patch.sh
+            ./scripts/patch.sh
+          else
+            echo "⚠️ No se encontró scripts/patch.sh, omitiendo parches."
+          fi
+
+      - name: 📦 Recompilar APK
+        run: |
+          mkdir -p dist
+          apktool b . -o dist/app_unsigned.apk
+
+      - name: ✍️ Firmar APK
+        uses: r0adkll/sign-android-release@v1
+        id: sign_app
+        with:
+          releaseDirectory: dist
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "34.0.0"
+
+      - name: 📤 Subir APK Final
+        uses: actions/upload-artifact@v4
+        with:
+          name: PlayerPro-Modificado
+          path: ${{ steps.sign_app.outputs.signedReleaseFile }}
