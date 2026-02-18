@@ -24,36 +24,35 @@ jobs:
           curl -L https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar -o bin/apktool.jar
           chmod +x bin/apktool bin/apktool.jar
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
-          # CORRECCIÓN: Usamos la ruta explícita para verificar la instalación
           ./bin/apktool --version
       - name: Sanitize Resources
         run: |
-          echo "Removing public.xml files to avoid ResTable_typeSpec entry count inconsistent error..."
           find res/values/ -name "public.xml" -delete
-          echo "Removing android:lStar and android:attr/lStar attributes from XML files..."
           find res/ -name "*.xml" -type f -exec sed -i 's/android:lStar="[^"]*"//g' {} +
           find res/ -name "*.xml" -type f -exec sed -i 's/android:attr\/lStar="[^"]*"//g' {} +
       - name: Build APK
         run: |
           mkdir -p dist
           apktool b . --use-aapt2 -o dist/app_unsigned.apk
-      - name: Debug - Verify APK Existence
+      - name: ✍️ Firmar APK Manualmente (Robust)
         run: |
-          echo "Verifying build output directory..."
-          ls -R dist/
-      - name: Sign APK
-        uses: r0adkll/sign-android-release@v1
-        id: sign_app
-        with:
-          releaseDirectory: dist
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
-        env:
-          BUILD_TOOLS_VERSION: "34.0.0"
+          # 1. Recuperar la llave del secreto
+          echo "${{ secrets.SIGNING_KEY }}" | base64 -d > release.keystore
+          # 2. Encontrar las herramientas de Android (Build Tools)
+          BUILD_TOOLS_PATH=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -n 1)
+          echo "Usando Build Tools en: $BUILD_TOOLS_PATH"
+          ZIPALIGN="$BUILD_TOOLS_PATH/zipalign"
+          APKSIGNER="$BUILD_TOOLS_PATH/apksigner"
+          # 3. Alinear APK (Paso obligatorio)
+          echo "Alineando APK..."
+          $ZIPALIGN -v -p 4 dist/app_unsigned.apk dist/app_aligned.apk
+          # 4. Firmar APK
+          echo "Firmando APK..."
+          $APKSIGNER sign --ks release.keystore --ks-key-alias "${{ secrets.ALIAS }}" --ks-pass pass:"${{ secrets.KEY_PASSWORD }}" --key-pass pass:"${{ secrets.KEY_PASSWORD }}" --out dist/PlayerPro_Signed.apk dist/app_aligned.apk
+          # 5. Verificar
+          $APKSIGNER verify dist/PlayerPro_Signed.apk
       - name: Upload Signed APK
         uses: actions/upload-artifact@v4
         with:
           name: PlayerPro-Signed-APK
-          path: ${{ steps.sign_app.outputs.signedReleaseFile }}
+          path: dist/PlayerPro_Signed.apk
