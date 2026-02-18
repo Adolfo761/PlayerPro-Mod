@@ -37,6 +37,14 @@ jobs:
             echo "⚠️ No se encontró scripts/patch.sh, omitiendo parches."
           fi
 
+      - name: 🧹 Sanitizar Recursos (Fix lStar Error)
+        run: |
+          echo "Eliminando atributo conflictivo lStar de los recursos..."
+          # Busca en todos los XML y elimina la propiedad lStar que rompe el build
+          grep -rl "android:lStar" res/ | xargs sed -i 's/android:lStar="[^"]*"//g' || true
+          grep -rl "android:lStar" res/ | xargs sed -i 's/android:attr\/lStar//g' || true
+          echo "✅ Limpieza completada."
+
       - name: 📦 Recompilar APK (Con AAPT2)
         run: |
           # Crear carpeta de destino por seguridad
