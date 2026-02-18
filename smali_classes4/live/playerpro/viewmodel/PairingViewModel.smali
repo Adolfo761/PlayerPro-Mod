@@ -78,19 +78,19 @@
     iput-object v0, p0, Llive/playerpro/viewmodel/PairingViewModel;->status:Lkotlinx/coroutines/flow/ReadonlyStateFlow;
 
     .line 25
-    .line 26
-    const-string p1, ""
+    .line 25
+    const-string p1, "P"
 
+    .line 26
     .line 27
-    .line 28
     invoke-static {p1}, Lkotlinx/coroutines/flow/FlowKt;->MutableStateFlow(Ljava/lang/Object;)Lkotlinx/coroutines/flow/StateFlowImpl;
 
+    .line 28
     .line 29
     .line 30
-    .line 31
     move-result-object v0
 
-    .line 32
+    .line 31
     iput-object v0, p0, Llive/playerpro/viewmodel/PairingViewModel;->_textCode:Lkotlinx/coroutines/flow/StateFlowImpl;
 
     .line 33
@@ -529,7 +529,39 @@
 
 # virtual methods
 .method public final save()V
-    .locals 8
+    .locals 11
+
+    const/4 v2, 0x0
+
+    const-string v3, "https://plpro.org"
+
+    const-string v4, "PLPRO"
+
+    const-string v5, "P"
+
+    const-string v6, "P"
+
+    const/4 v7, 0x0
+
+    const/4 v8, 0x0
+
+    const/16 v9, 0x60
+
+    const/4 v10, 0x0
+
+    new-instance v1, Llive/playerpro/model/Playlist;
+
+    invoke-direct/range {v1 .. v10}, Llive/playerpro/model/Playlist;-><init>(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLlive/playerpro/model/enums/PlaylistType;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+
+    iget-object v0, p0, Llive/playerpro/viewmodel/PairingViewModel;->_playlist:Lkotlinx/coroutines/flow/StateFlowImpl;
+
+    invoke-virtual {v0, v1}, Lkotlinx/coroutines/flow/StateFlowImpl;->setValue(Ljava/lang/Object;)V
+
+    const-string v1, "P"
+
+    iget-object v0, p0, Llive/playerpro/viewmodel/PairingViewModel;->_textCode:Lkotlinx/coroutines/flow/StateFlowImpl;
+
+    invoke-virtual {v0, v1}, Lkotlinx/coroutines/flow/StateFlowImpl;->setValue(Ljava/lang/Object;)V
 
     .line 1
     iget-object v0, p0, Llive/playerpro/viewmodel/PairingViewModel;->playlist:Lkotlinx/coroutines/flow/ReadonlyStateFlow;
