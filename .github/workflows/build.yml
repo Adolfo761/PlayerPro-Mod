@@ -37,10 +37,12 @@ jobs:
             echo "⚠️ No se encontró scripts/patch.sh, omitiendo parches."
           fi
 
-      - name: 📦 Recompilar APK
+      - name: 📦 Recompilar APK (Con AAPT2)
         run: |
+          # Crear carpeta de destino por seguridad
           mkdir -p dist
-          apktool b . -o dist/app_unsigned.apk
+          # Usar flag --use-aapt2 para evitar errores de recursos modernos
+          apktool b . --use-aapt2 -o dist/app_unsigned.apk
 
       - name: ✍️ Firmar APK
         uses: r0adkll/sign-android-release@v1
