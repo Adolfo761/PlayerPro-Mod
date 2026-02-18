@@ -681,7 +681,7 @@
     move-result v7
 
     .line 72
-    if-nez v7, :cond_1
+    goto :cond_1
 
     .line 73
     .line 74
@@ -769,7 +769,7 @@
     const/4 v7, 0x3
 
     .line 115
-    if-nez v0, :cond_2
+    goto :cond_2
 
     .line 116
     .line 117
