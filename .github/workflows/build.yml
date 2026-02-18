@@ -37,18 +37,25 @@ jobs:
             echo "⚠️ No se encontró scripts/patch.sh, omitiendo parches."
           fi
 
-      - name: 🧹 Sanitización NUCLEAR de Recursos
+      - name: 🔓 DESBLOQUEAR RECURSOS (Fix Inconsistent Count)
         run: |
-          echo "☢️ Iniciando borrado de líneas con lStar..."
-          # Este comando busca en TODOS los archivos XML y borra la línea completa si tiene lStar
-          find res -type f -name "*.xml" -exec sed -i '/android:lStar/d' {} +
-          find res -type f -name "*.xml" -exec sed -i '/android:attr\/lStar/d' {} +
-          echo "✅ Exterminio completado."
+          echo "🔥 Borrando public.xml para regenerar IDs de recursos..."
+          # Esto obliga a apktool a recrear la tabla de recursos desde cero
+          find res/values -name "public.xml" -delete
+          echo "✅ public.xml eliminado."
+
+      - name: 🧹 Sanitizar Recursos (Fix lStar Seguro)
+        run: |
+          echo "🛡️ Eliminando atributo lStar de forma segura..."
+          # Reemplaza solo el texto del atributo, NO borra la línea completa
+          grep -rl "android:lStar" res/ | xargs sed -i 's/android:lStar="[^"]*"//g' || true
+          grep -rl "android:attr/lStar" res/ | xargs sed -i 's/android:attr\/lStar//g' || true
+          echo "✅ Limpieza completada."
 
       - name: 📦 Recompilar APK
         run: |
           mkdir -p dist
-          # Usamos --use-aapt2 obligatoriamente
+          # Usamos --use-aapt2 para máxima compatibilidad
           apktool b . --use-aapt2 -o dist/app_unsigned.apk
 
       - name: ✍️ Firmar APK
