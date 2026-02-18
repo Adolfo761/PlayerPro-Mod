@@ -24,7 +24,8 @@ jobs:
           curl -L https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar -o bin/apktool.jar
           chmod +x bin/apktool bin/apktool.jar
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
-          apktool --version
+          # CORRECCIÓN: Usamos la ruta explícita para verificar la instalación
+          ./bin/apktool --version
       - name: Sanitize Resources
         run: |
           echo "Removing public.xml files to avoid ResTable_typeSpec entry count inconsistent error..."
