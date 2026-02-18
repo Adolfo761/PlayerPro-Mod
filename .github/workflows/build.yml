@@ -37,19 +37,18 @@ jobs:
             echo "⚠️ No se encontró scripts/patch.sh, omitiendo parches."
           fi
 
-      - name: 🧹 Sanitizar Recursos (Fix lStar Error)
+      - name: 🧹 Sanitización NUCLEAR de Recursos
         run: |
-          echo "Eliminando atributo conflictivo lStar de los recursos..."
-          # Busca en todos los XML y elimina la propiedad lStar que rompe el build
-          grep -rl "android:lStar" res/ | xargs sed -i 's/android:lStar="[^"]*"//g' || true
-          grep -rl "android:lStar" res/ | xargs sed -i 's/android:attr\/lStar//g' || true
-          echo "✅ Limpieza completada."
+          echo "☢️ Iniciando borrado de líneas con lStar..."
+          # Este comando busca en TODOS los archivos XML y borra la línea completa si tiene lStar
+          find res -type f -name "*.xml" -exec sed -i '/android:lStar/d' {} +
+          find res -type f -name "*.xml" -exec sed -i '/android:attr\/lStar/d' {} +
+          echo "✅ Exterminio completado."
 
-      - name: 📦 Recompilar APK (Con AAPT2)
+      - name: 📦 Recompilar APK
         run: |
-          # Crear carpeta de destino por seguridad
           mkdir -p dist
-          # Usar flag --use-aapt2 para evitar errores de recursos modernos
+          # Usamos --use-aapt2 obligatoriamente
           apktool b . --use-aapt2 -o dist/app_unsigned.apk
 
       - name: ✍️ Firmar APK
