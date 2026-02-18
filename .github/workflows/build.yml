@@ -21,7 +21,8 @@ jobs:
       - name: Instalar Apktool
         run: |
           wget -q -O apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
-          wget -q -O apktool.jar https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.3.jar
+          # URL CORREGIDA: Usamos GitHub Releases en lugar de Bitbucket
+          wget -q -O apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar
           sudo mv apktool /usr/local/bin/apktool
           sudo mv apktool.jar /usr/local/bin/apktool.jar
           sudo chmod +x /usr/local/bin/apktool
