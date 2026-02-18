@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@id/buttonClose" app:cardCornerRadius="8.0dip" app:cardUseCompatPadding="true" app:contentPadding="10.0dip">
+        <RelativeLayout android:id="@id/adFrame" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView android:id="@id/buttonClose" android:focusable="true" android:nextFocusDown="@id/adView" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="50.0dip" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:layout_alignParentTop="true" android:layout_marginStart="50.0dip" app:cardCornerRadius="8.0dip" app:cardUseCompatPadding="true" app:contentPadding="10.0dip">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:id="@id/imageIcon" android:layout_width="32.0dip" android:layout_height="32.0dip" android:layout_marginRight="10.0dip" android:scaleType="fitCenter" android:layout_marginEnd="10.0dip" />
+            <TextView android:textStyle="bold" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:id="@id/textName" android:layout_width="0.0dip" android:layout_height="wrap_content" android:lines="1" android:layout_weight="1.0" />
+            <FrameLayout android:layout_width="26.0dip" android:layout_height="26.0dip" android:layout_marginLeft="10.0dip" android:layout_marginStart="10.0dip">
+                <ProgressBar android:id="@id/progressBar" android:layout_width="fill_parent" android:layout_height="fill_parent" android:indeterminate="true" android:indeterminateTint="?android:textColorPrimary" />
+                <ImageView android:id="@id/imageArrow" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/wortise_arrow_right" android:scaleType="fitCenter" android:tint="?android:textColorPrimary" />
+            </FrameLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

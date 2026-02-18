@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/adFrame" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <FrameLayout android:id="@id/buttonClose" android:background="@drawable/wortise_selector_transparent" android:padding="@dimen/wortise_fullscreen_close_button_padding" android:focusable="true" android:visibility="gone" android:nextFocusDown="@id/adView" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentRight="true" android:layout_alignParentEnd="true">
+        <ImageView android:layout_gravity="center" android:duplicateParentState="true" android:layout_width="32.0dip" android:layout_height="32.0dip" android:src="@drawable/wortise_button_close" />
+    </FrameLayout>
+</RelativeLayout>

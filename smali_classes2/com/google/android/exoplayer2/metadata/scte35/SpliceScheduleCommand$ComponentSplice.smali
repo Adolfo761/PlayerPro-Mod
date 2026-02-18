@@ -1,0 +1,31 @@
+.class public final Lcom/google/android/exoplayer2/metadata/scte35/SpliceScheduleCommand$ComponentSplice;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+
+# instance fields
+.field public final componentTag:I
+
+.field public final utcSpliceTime:J
+
+
+# direct methods
+.method public constructor <init>(IJ)V
+    .locals 0
+
+    .line 1
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    .line 2
+    .line 3
+    .line 4
+    iput p1, p0, Lcom/google/android/exoplayer2/metadata/scte35/SpliceScheduleCommand$ComponentSplice;->componentTag:I
+
+    .line 5
+    .line 6
+    iput-wide p2, p0, Lcom/google/android/exoplayer2/metadata/scte35/SpliceScheduleCommand$ComponentSplice;->utcSpliceTime:J
+
+    .line 7
+    .line 8
+    return-void
+.end method

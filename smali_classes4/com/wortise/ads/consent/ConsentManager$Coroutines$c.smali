@@ -1,0 +1,121 @@
+.class final synthetic Lcom/wortise/ads/consent/ConsentManager$Coroutines$c;
+.super Lkotlin/jvm/internal/FunctionReferenceImpl;
+.source "SourceFile"
+
+# interfaces
+.implements Lkotlin/jvm/functions/Function2;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lcom/wortise/ads/consent/ConsentManager$Coroutines;->requestIfRequired(Landroid/app/Activity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x1001
+    name = null
+.end annotation
+
+.annotation system Ldalvik/annotation/Signature;
+    value = {
+        "Lkotlin/jvm/internal/FunctionReferenceImpl;",
+        "Lkotlin/jvm/functions/Function2;"
+    }
+.end annotation
+
+
+# direct methods
+.method public constructor <init>(Ljava/lang/Object;)V
+    .locals 7
+
+    .line 1
+    const/4 v1, 0x2
+
+    .line 2
+    const-class v3, Lcom/wortise/ads/j3;
+
+    .line 3
+    .line 4
+    const-string v5, "requestIfRequired"
+
+    .line 5
+    .line 6
+    const-string v6, "requestIfRequired(Landroid/app/Activity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;"
+
+    .line 7
+    .line 8
+    const/4 v2, 0x0
+
+    .line 9
+    move-object v0, p0
+
+    .line 10
+    move-object v4, p1
+
+    .line 11
+    invoke-direct/range {v0 .. v6}, Lkotlin/jvm/internal/FunctionReference;-><init>(IILjava/lang/Class;Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 12
+    .line 13
+    .line 14
+    return-void
+.end method
+
+
+# virtual methods
+.method public final a(Landroid/app/Activity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+    .locals 1
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Landroid/app/Activity;",
+            "Lkotlin/coroutines/Continuation<",
+            "-",
+            "Ljava/lang/Boolean;",
+            ">;)",
+            "Ljava/lang/Object;"
+        }
+    .end annotation
+
+    .line 1
+    iget-object v0, p0, Lkotlin/jvm/internal/CallableReference;->receiver:Ljava/lang/Object;
+
+    .line 2
+    .line 3
+    check-cast v0, Lcom/wortise/ads/j3;
+
+    .line 4
+    .line 5
+    invoke-virtual {v0, p1, p2}, Lcom/wortise/ads/j3;->c(Landroid/app/Activity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+
+    .line 6
+    .line 7
+    .line 8
+    move-result-object p1
+
+    .line 9
+    return-object p1
+.end method
+
+.method public bridge synthetic invoke(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    .locals 0
+
+    .line 1
+    check-cast p1, Landroid/app/Activity;
+
+    .line 2
+    .line 3
+    check-cast p2, Lkotlin/coroutines/Continuation;
+
+    .line 4
+    .line 5
+    invoke-virtual {p0, p1, p2}, Lcom/wortise/ads/consent/ConsentManager$Coroutines$c;->a(Landroid/app/Activity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+
+    .line 6
+    .line 7
+    .line 8
+    move-result-object p1
+
+    .line 9
+    return-object p1
+.end method

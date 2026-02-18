@@ -1,0 +1,56 @@
+.class public interface abstract Lcom/bytedance/sdk/openadsdk/IListenerManager;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+# interfaces
+.implements Landroid/os/IInterface;
+
+
+# annotations
+.annotation system Ldalvik/annotation/MemberClasses;
+    value = {
+        Lcom/bytedance/sdk/openadsdk/IListenerManager$Stub;,
+        Lcom/bytedance/sdk/openadsdk/IListenerManager$Default;
+    }
+.end annotation
+
+
+# virtual methods
+.method public abstract broadcastDialogListener(Ljava/lang/String;I)V
+.end method
+
+.method public abstract broadcastPermissionListener(Ljava/lang/String;Ljava/lang/String;)V
+.end method
+
+.method public abstract executeAppOpenAdCallback(Ljava/lang/String;Ljava/lang/String;)V
+.end method
+
+.method public abstract executeDisLikeClosedCallback(Ljava/lang/String;Ljava/lang/String;)V
+.end method
+
+.method public abstract executeFullVideoCallback(Ljava/lang/String;Ljava/lang/String;)V
+.end method
+
+.method public abstract executeRewardVideoCallback(Ljava/lang/String;Ljava/lang/String;ZILjava/lang/String;ILjava/lang/String;)V
+.end method
+
+.method public abstract registerAppOpenAdListener(Ljava/lang/String;Lcom/bytedance/sdk/openadsdk/IAppOpenAdInteractionListener;)V
+.end method
+
+.method public abstract registerDialogListener(Ljava/lang/String;Lcom/bytedance/sdk/openadsdk/ICommonDialogListener;)V
+.end method
+
+.method public abstract registerDisLikeClosedListener(Ljava/lang/String;Lcom/bytedance/sdk/openadsdk/IDislikeClosedListener;)V
+.end method
+
+.method public abstract registerFullVideoListener(Ljava/lang/String;Lcom/bytedance/sdk/openadsdk/IFullScreenVideoAdInteractionListener;)V
+.end method
+
+.method public abstract registerPermissionListener(Ljava/lang/String;Lcom/bytedance/sdk/openadsdk/ICommonPermissionListener;)V
+.end method
+
+.method public abstract registerRewardVideoListener(Ljava/lang/String;Lcom/bytedance/sdk/openadsdk/IRewardAdInteractionListener;)V
+.end method
+
+.method public abstract unregisterDisLikeClosedListener(Ljava/lang/String;)V
+.end method

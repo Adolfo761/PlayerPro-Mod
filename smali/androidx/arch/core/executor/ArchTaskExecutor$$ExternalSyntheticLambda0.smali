@@ -1,0 +1,89 @@
+.class public final synthetic Landroidx/arch/core/executor/ArchTaskExecutor$$ExternalSyntheticLambda0;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+# interfaces
+.implements Ljava/util/concurrent/Executor;
+
+
+# instance fields
+.field public final synthetic $r8$classId:I
+
+
+# direct methods
+.method public synthetic constructor <init>(I)V
+    .locals 0
+
+    .line 1
+    iput p1, p0, Landroidx/arch/core/executor/ArchTaskExecutor$$ExternalSyntheticLambda0;->$r8$classId:I
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+.method private final execute$androidx$media3$exoplayer$video$CompositingVideoSinkProvider$$ExternalSyntheticLambda0(Ljava/lang/Runnable;)V
+    .locals 0
+
+    .line 1
+    return-void
+.end method
+
+
+# virtual methods
+.method public final execute(Ljava/lang/Runnable;)V
+    .locals 1
+
+    .line 1
+    iget v0, p0, Landroidx/arch/core/executor/ArchTaskExecutor$$ExternalSyntheticLambda0;->$r8$classId:I
+
+    .line 2
+    .line 3
+    packed-switch v0, :pswitch_data_0
+
+    .line 4
+    .line 5
+    .line 6
+    invoke-interface {p1}, Ljava/lang/Runnable;->run()V
+
+    .line 7
+    .line 8
+    .line 9
+    :pswitch_0
+    return-void
+
+    .line 10
+    :pswitch_1
+    invoke-static {}, Landroidx/arch/core/executor/ArchTaskExecutor;->getInstance()Landroidx/arch/core/executor/ArchTaskExecutor;
+
+    .line 11
+    .line 12
+    .line 13
+    move-result-object v0
+
+    .line 14
+    iget-object v0, v0, Landroidx/arch/core/executor/ArchTaskExecutor;->mDelegate:Landroidx/arch/core/executor/DefaultTaskExecutor;
+
+    .line 15
+    .line 16
+    iget-object v0, v0, Landroidx/arch/core/executor/DefaultTaskExecutor;->mDiskIO:Ljava/util/concurrent/ExecutorService;
+
+    .line 17
+    .line 18
+    invoke-interface {v0, p1}, Ljava/util/concurrent/Executor;->execute(Ljava/lang/Runnable;)V
+
+    .line 19
+    .line 20
+    .line 21
+    return-void
+
+    .line 22
+    nop
+
+    .line 23
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
+.end method

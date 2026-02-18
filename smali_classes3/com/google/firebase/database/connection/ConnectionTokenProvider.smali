@@ -1,0 +1,11 @@
+.class public interface abstract Lcom/google/firebase/database/connection/ConnectionTokenProvider;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+
+# annotations
+.annotation system Ldalvik/annotation/MemberClasses;
+    value = {
+        Lcom/google/firebase/database/connection/ConnectionTokenProvider$GetTokenCallback;
+    }
+.end annotation

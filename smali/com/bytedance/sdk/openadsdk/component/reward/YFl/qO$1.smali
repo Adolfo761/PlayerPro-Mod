@@ -1,0 +1,36 @@
+.class Lcom/bytedance/sdk/openadsdk/component/reward/YFl/qO$1;
+.super Lcom/bytedance/sdk/openadsdk/core/Sg/DSW;
+.source "SourceFile"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lcom/bytedance/sdk/openadsdk/component/reward/YFl/qO;->YFl()V
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x1
+    name = null
+.end annotation
+
+
+# instance fields
+.field final synthetic YFl:Lcom/bytedance/sdk/openadsdk/component/reward/YFl/qO;
+
+
+# direct methods
+.method public constructor <init>(Lcom/bytedance/sdk/openadsdk/component/reward/YFl/qO;Ljava/lang/String;Lcom/bytedance/sdk/openadsdk/core/YoT/YFl;)V
+    .locals 0
+
+    .line 1
+    iput-object p1, p0, Lcom/bytedance/sdk/openadsdk/component/reward/YFl/qO$1;->YFl:Lcom/bytedance/sdk/openadsdk/component/reward/YFl/qO;
+
+    .line 2
+    .line 3
+    invoke-direct {p0, p2, p3}, Lcom/bytedance/sdk/openadsdk/core/Sg/DSW;-><init>(Ljava/lang/String;Lcom/bytedance/sdk/openadsdk/core/YoT/YFl;)V
+
+    .line 4
+    .line 5
+    .line 6
+    return-void
+.end method

@@ -1,0 +1,122 @@
+.class public abstract Lcom/inmobi/media/kb;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+
+# static fields
+.field public static final a:Lcom/inmobi/media/w5;
+
+.field public static b:I
+
+.field public static c:Ljava/lang/Integer;
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .locals 2
+
+    .line 1
+    invoke-static {}, Lcom/inmobi/media/Ha;->d()Landroid/content/Context;
+
+    .line 2
+    .line 3
+    .line 4
+    move-result-object v0
+
+    .line 5
+    if-eqz v0, :cond_0
+
+    .line 6
+    .line 7
+    sget-object v1, Lcom/inmobi/media/w5;->b:Ljava/util/concurrent/ConcurrentHashMap;
+
+    .line 8
+    .line 9
+    const-string v1, "imtelemetrydboverflow"
+
+    .line 10
+    .line 11
+    invoke-static {v0, v1}, Lcom/inmobi/media/v5;->a(Landroid/content/Context;Ljava/lang/String;)Lcom/inmobi/media/w5;
+
+    .line 12
+    .line 13
+    .line 14
+    move-result-object v0
+
+    .line 15
+    goto :goto_0
+
+    .line 16
+    :cond_0
+    const/4 v0, 0x0
+
+    .line 17
+    :goto_0
+    sput-object v0, Lcom/inmobi/media/kb;->a:Lcom/inmobi/media/w5;
+
+    .line 18
+    .line 19
+    const/4 v0, -0x1
+
+    .line 20
+    sput v0, Lcom/inmobi/media/kb;->b:I
+
+    .line 21
+    .line 22
+    return-void
+.end method
+
+.method public static a()I
+    .locals 3
+
+    .line 1
+    sget v0, Lcom/inmobi/media/kb;->b:I
+
+    .line 2
+    .line 3
+    const/4 v1, -0x1
+
+    .line 4
+    if-ne v0, v1, :cond_1
+
+    .line 5
+    .line 6
+    sget-object v0, Lcom/inmobi/media/kb;->a:Lcom/inmobi/media/w5;
+
+    .line 7
+    .line 8
+    const/4 v1, 0x0
+
+    .line 9
+    if-eqz v0, :cond_0
+
+    .line 10
+    .line 11
+    const-string v2, "count"
+
+    .line 12
+    .line 13
+    iget-object v0, v0, Lcom/inmobi/media/w5;->a:Landroid/content/SharedPreferences;
+
+    .line 14
+    .line 15
+    invoke-interface {v0, v2, v1}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    .line 16
+    .line 17
+    .line 18
+    move-result v1
+
+    .line 19
+    :cond_0
+    sput v1, Lcom/inmobi/media/kb;->b:I
+
+    .line 20
+    .line 21
+    :cond_1
+    sget v0, Lcom/inmobi/media/kb;->b:I
+
+    .line 22
+    .line 23
+    return v0
+.end method

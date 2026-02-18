@@ -1,0 +1,55 @@
+.class public final Lcom/ironsource/p8;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+# interfaces
+.implements Lcom/ironsource/tc;
+
+
+# annotations
+.annotation system Ldalvik/annotation/MemberClasses;
+    value = {
+        Lcom/ironsource/p8$a;
+    }
+.end annotation
+
+
+# instance fields
+.field private final a:Lorg/json/JSONObject;
+
+
+# direct methods
+.method public constructor <init>(Lorg/json/JSONObject;)V
+    .locals 0
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    if-nez p1, :cond_0
+
+    new-instance p1, Lorg/json/JSONObject;
+
+    invoke-direct {p1}, Lorg/json/JSONObject;-><init>()V
+
+    :cond_0
+    iput-object p1, p0, Lcom/ironsource/p8;->a:Lorg/json/JSONObject;
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public c()Z
+    .locals 3
+
+    iget-object v0, p0, Lcom/ironsource/p8;->a:Lorg/json/JSONObject;
+
+    const-string v1, "clickCheck"
+
+    const/4 v2, 0x0
+
+    invoke-virtual {v0, v1, v2}, Lorg/json/JSONObject;->optBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method

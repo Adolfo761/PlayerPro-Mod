@@ -1,0 +1,8 @@
+.class public interface abstract Landroidx/compose/foundation/lazy/layout/LazyLayoutKeyIndexMap;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+
+# virtual methods
+.method public abstract getIndex(Ljava/lang/Object;)I
+.end method
