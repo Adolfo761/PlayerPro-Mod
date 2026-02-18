@@ -151,19 +151,19 @@
     const/4 v2, 0x0
 
     .line 62
-    const/4 v3, 0x0
+    const-string v3, "https://plpro.org"
 
     .line 63
-    const/4 v4, 0x0
+    const-string v4, "PLPRO"
 
     .line 64
-    const/4 v5, 0x0
+    const-string v5, "P"
 
     .line 65
-    const/4 v6, 0x0
+    const-string v6, "P"
 
     .line 66
-    const/16 v9, 0x7f
+    const/16 v9, 0x60
 
     .line 67
     .line 68
