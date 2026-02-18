@@ -1,65 +1,46 @@
-name: Compilar Player Pro Mod
+name: Build and Sign PlayerPro APK
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Chequear Código
+      - name: Checkout Repository
         uses: actions/checkout@v4
-
-      - name: Configurar Java
+      - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
+          distribution: 'temurin'
           java-version: '17'
-
-      - name: Instalar Apktool
+      - name: Install Apktool
         run: |
-          wget -q -O apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
-          # URL CORREGIDA: Usamos GitHub Releases en lugar de Bitbucket
-          wget -q -O apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar
-          sudo mv apktool /usr/local/bin/apktool
-          sudo mv apktool.jar /usr/local/bin/apktool.jar
-          sudo chmod +x /usr/local/bin/apktool
-          sudo chmod +x /usr/local/bin/apktool.jar
-          apktool -version
-
-      - name: 🛠️ Aplicar Parches
+          mkdir -p bin
+          curl -L https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool -o bin/apktool
+          curl -L https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar -o bin/apktool.jar
+          chmod +x bin/apktool bin/apktool.jar
+          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+          apktool --version
+      - name: Sanitize Resources
         run: |
-          if [ -f "scripts/patch.sh" ]; then
-            chmod +x scripts/patch.sh
-            ./scripts/patch.sh
-          else
-            echo "⚠️ No se encontró scripts/patch.sh, omitiendo parches."
-          fi
-
-      - name: 🔓 DESBLOQUEAR RECURSOS (Fix Inconsistent Count)
-        run: |
-          echo "🔥 Borrando public.xml para regenerar IDs de recursos..."
-          # Esto obliga a apktool a recrear la tabla de recursos desde cero
-          find res/values -name "public.xml" -delete
-          echo "✅ public.xml eliminado."
-
-      - name: 🧹 Sanitizar Recursos (Fix lStar Seguro)
-        run: |
-          echo "🛡️ Eliminando atributo lStar de forma segura..."
-          # Reemplaza solo el texto del atributo, NO borra la línea completa
-          grep -rl "android:lStar" res/ | xargs sed -i 's/android:lStar="[^"]*"//g' || true
-          grep -rl "android:attr/lStar" res/ | xargs sed -i 's/android:attr\/lStar//g' || true
-          echo "✅ Limpieza completada."
-
-      - name: 📦 Recompilar APK
+          echo "Removing public.xml files to avoid ResTable_typeSpec entry count inconsistent error..."
+          find res/values/ -name "public.xml" -delete
+          echo "Removing android:lStar and android:attr/lStar attributes from XML files..."
+          find res/ -name "*.xml" -type f -exec sed -i 's/android:lStar="[^"]*"//g' {} +
+          find res/ -name "*.xml" -type f -exec sed -i 's/android:attr\/lStar="[^"]*"//g' {} +
+      - name: Build APK
         run: |
           mkdir -p dist
-          # Usamos --use-aapt2 para máxima compatibilidad
           apktool b . --use-aapt2 -o dist/app_unsigned.apk
-
-      - name: ✍️ Firmar APK
+      - name: Debug - Verify APK Existence
+        run: |
+          echo "Verifying build output directory..."
+          ls -R dist/
+      - name: Sign APK
         uses: r0adkll/sign-android-release@v1
         id: sign_app
         with:
@@ -70,9 +51,8 @@ jobs:
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
           BUILD_TOOLS_VERSION: "34.0.0"
-
-      - name: 📤 Subir APK Final
+      - name: Upload Signed APK
         uses: actions/upload-artifact@v4
         with:
-          name: PlayerPro-Modificado
+          name: PlayerPro-Signed-APK
           path: ${{ steps.sign_app.outputs.signedReleaseFile }}
