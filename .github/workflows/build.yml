@@ -1,4 +1,4 @@
-name: Build and Sign PlayerPro APK
+name: Build PlayerPro (Fix Crash)
 
 on:
   workflow_dispatch:
@@ -12,11 +12,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
       - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
+
       - name: Install Apktool
         run: |
           mkdir -p bin
@@ -25,34 +27,30 @@ jobs:
           chmod +x bin/apktool bin/apktool.jar
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
           ./bin/apktool --version
-      - name: Sanitize Resources
+
+      - name: Sanitize Resources (Solo lStar)
         run: |
-          find res/values/ -name "public.xml" -delete
+          # IMPORTANTE: NO borramos public.xml esta vez para no romper los IDs.
+          echo "Preservando mapa de recursos original..."
+          echo "Eliminando atributo lStar conflictivo..."
           find res/ -name "*.xml" -type f -exec sed -i 's/android:lStar="[^"]*"//g' {} +
           find res/ -name "*.xml" -type f -exec sed -i 's/android:attr\/lStar="[^"]*"//g' {} +
+
       - name: Build APK
         run: |
           mkdir -p dist
+          # Si esto falla, sabremos que es imposible compilar sin romper los IDs
           apktool b . --use-aapt2 -o dist/app_unsigned.apk
-      - name: ✍️ Firmar APK Manualmente (Robust)
+
+      - name: ✍️ Firmar APK Manualmente
         run: |
-          # 1. Recuperar la llave del secreto
           echo "${{ secrets.SIGNING_KEY }}" | base64 -d > release.keystore
-          # 2. Encontrar las herramientas de Android (Build Tools)
           BUILD_TOOLS_PATH=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -n 1)
-          echo "Usando Build Tools en: $BUILD_TOOLS_PATH"
-          ZIPALIGN="$BUILD_TOOLS_PATH/zipalign"
-          APKSIGNER="$BUILD_TOOLS_PATH/apksigner"
-          # 3. Alinear APK (Paso obligatorio)
-          echo "Alineando APK..."
-          $ZIPALIGN -v -p 4 dist/app_unsigned.apk dist/app_aligned.apk
-          # 4. Firmar APK
-          echo "Firmando APK..."
-          $APKSIGNER sign --ks release.keystore --ks-key-alias "${{ secrets.ALIAS }}" --ks-pass pass:"${{ secrets.KEY_PASSWORD }}" --key-pass pass:"${{ secrets.KEY_PASSWORD }}" --out dist/PlayerPro_Signed.apk dist/app_aligned.apk
-          # 5. Verificar
-          $APKSIGNER verify dist/PlayerPro_Signed.apk
-      - name: Upload Signed APK
+          $BUILD_TOOLS_PATH/zipalign -v -p 4 dist/app_unsigned.apk dist/app_aligned.apk
+          $BUILD_TOOLS_PATH/apksigner sign --ks release.keystore --ks-key-alias "${{ secrets.ALIAS }}" --ks-pass pass:"${{ secrets.KEY_PASSWORD }}" --key-pass pass:"${{ secrets.KEY_PASSWORD }}" --out dist/PlayerPro_FixCrash.apk dist/app_aligned.apk
+
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: PlayerPro-Signed-APK
-          path: dist/PlayerPro_Signed.apk
+          name: PlayerPro-FixCrash
+          path: dist/PlayerPro_FixCrash.apk
