@@ -151,7 +151,7 @@
     const/4 v2, 0x0
 
     .line 62
-    const-string v3, "https://plpro.org"
+    const-string v3, "http://localhost/null"
 
     .line 63
     const-string v4, "PLPRO"
@@ -533,7 +533,7 @@
 
     const/4 v2, 0x0
 
-    const-string v3, "https://plpro.org"
+    const-string v3, "http://localhost/null"
 
     const-string v4, "PLPRO"
 
