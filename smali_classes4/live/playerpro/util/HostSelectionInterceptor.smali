@@ -288,7 +288,7 @@
 
     .line 134
     .line 135
-    const-string v2, "PLPro/8"
+    const-string v2, "PLPro/999999"
 
     .line 136
     .line 137

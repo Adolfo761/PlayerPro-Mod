@@ -55,7 +55,7 @@
 
     .line 7
     :cond_0
-    const/16 v0, 0x8
+    const v0, 0xf423f
 
     .line 8
     .line 9
@@ -79,7 +79,7 @@
 
     .line 17
     :cond_1
-    const-string p1, "1.0.7"
+    const-string p1, "9.9.9"
 
     .line 18
     .line 19
